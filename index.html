@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pikaday Responsive</title>
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+		<link rel="stylesheet" href="pikaday/pikaday.css">
+		<script src="libs/modernizr-custom.js"></script>
+		<style>
+			body {
+				font-family: Arial;
+			}
+
+			h1 {
+				font-size: 1.5em;
+				margin-top: 1em;
+			}
+
+			h2 {
+				font-size: 1em;
+			}
+
+			p {
+				margin: 1em 0;
+			}
+			
+			.output {
+				padding: 5px;
+				background: #eee;
+				height: 1em;
+			}
+			.output:before {
+				content: "> ";
+			}
+		</style>
+  </head>
+  <body>
+		
+		<h1>PikadayResponsive</h1>
+		<p>
+			A responsive datepicker built on top of Pikaday. 
+			It shows the native datepicker on mobile devices and a nice JS-picker on desktop. 
+			It is realised as a jQuery-Plugin.
+		</p>
+		
+		<p>
+			More Infos & Download: <br/>
+			<a href="https://github.com/mydea/PikadayResponsive">https://github.com/mydea/PikadayResponsive</a>
+		</p>
+
+		<p>
+			Created by: Francesco Novy
+			<br/><a href="http://fnovy.com">www.fnovy.com</a>
+			| <a href="mailto:francesconovy@gmail.com">francesconovy@gmail.com</a>
+		</p>
+		
+		<h1>Default values</h1>
+		<p>
+			<label for="date1">Select a date:</label>
+			<input name="date" type="date" id="date1" />
+		</p>
+
+		<h2>The output-value of the input-field is:</h2>
+		<p id="output1" class="output"></p>
+
+		<h1>Change output format</h1>
+		<p>You can specify an output format as a Moment.js string. E.g. "MM.YYYY":</p>
+		<p>
+			<label for="date2">Select a date:</label>
+			<input name="date" type="date" id="date2" />
+		</p>
+
+		<h2>The output-value of the input-field is:</h2>
+		<p id="output2" class="output"></p>
+		
+		<h1>Change display format</h1>
+		<p>You can also specifiy the display format as you wish. E.g. "Do MMM YYYY"</p>
+		<p>
+			<label for="date3">Select a date:</label>
+			<input name="date" type="date" id="date3" />
+		</p>
+
+		<h2>The output-value of the input-field is:</h2>
+		<p id="output3" class="output"></p>
+
+		<script src="libs/jquery-2.1.0.min.js"></script>
+		<script src="pikaday/pikaday-package.js"></script>
+
+		<script>
+			// Default values
+			var d1 = $("#date1").pikaday({
+				placeholder: "enter date"
+			});
+
+			// Test to show the output value
+			$(d1).change(function() {
+				$("#output1").html($(this).val());
+			});
+
+			// Change output format
+			var d2 = $("#date2").pikaday({
+				outputFormat: "MM.YYYY", // default: "unix"
+				placeholder: "enter date"
+			});
+
+			// Test to show the output value
+			$(d2).change(function() {
+				$("#output2").html($(this).val());
+			});
+			
+			// Change input format
+			var d3 = $("#date3").pikaday({
+				displayFormat: "Do MMMM YYYY", // default: "DD.MM.YYYY"
+				placeholder: "enter date"
+			});
+
+			// Test to show the output value
+			$(d3).change(function() {
+				$("#output3").html($(this).val());
+			});
+		</script>
+  </body>
+</html>
