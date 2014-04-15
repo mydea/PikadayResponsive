@@ -7,32 +7,68 @@
 (function($) {
 
 	$.fn.pikaday = function(options) {
-
 		var settings = $.extend({}, $.fn.pikaday.defaults, options);
 
 		return this.each(function() {
-			var elem = $(this);
+			var elem, input, container, self, picker, isPikaday;
+			elem = $(this);
+			self = this;
+			
+			this.clearDate = function() {
+				$(this).parent(".pikaday-container").children("input").each(function() {
+					$(this).val("").trigger("change");
+				});
+			};
+			
+			this.gotoToday = function() {
+				if(isPikaday) {
+					$(this).siblings(".pikaday-display").val(moment().format(settings.displayFormat)).trigger("change");
+					picker.gotoToday();
+				} else {
+					$(this).siblings(".pikaday-invisible").val(moment().format("YYYY-MM-DD")).trigger("change");
+				}
+			};
+			
+			// Check if is input-field
+			if(elem.prop("tagName") !== "INPUT") {
+				console.error("Pikaday can only be intitialized on input-fields! Tried to initialized on: ");
+				console.error(elem);
+				return;
+			}
+			
 			// Original Input-Field is hidden and will contain the final output value
 			elem.attr("type", "hidden");
 			// Wrap the input in a container
 			elem.wrap("<span class='pikaday-container'></span>");
-			var container = elem.parent(".pikaday-container");
+			container = elem.parent(".pikaday-container");
 
 			// Check if a native datepicker or pikaday should be displayed
 			// Native datepicker is displayed if touch and HTML5 input type date is supported
 			if(!settings.forcePikaday && (settings.hasTouch && settings.hasNativeDate)) {
 				// Native datepicker
+				isPikaday = false;
 				
 				// The following element will be read-only and click-through 
 				// and will only be used to display the formatted date
-				var display = $("<input type='text' readonly class='pikaday-display pikaday-display-native' placeholder='"+settings.placeholder+"' />");
+				var display = $("<input type='text' readonly class='pikaday-display pikaday-display-native "+settings.classes+"' placeholder='"+settings.placeholder+"' />");
 				container.append(display);
 				
 				// The actual input field
-				var input = $("<input type='date' class='pikaday-invisible' placeholder='"+settings.placeholder+"' />")
+				input = $("<input type='date' class='pikaday-invisible' />");
 				container.append(input);
 				
 				input.change(function() {
+					// If is empty
+					if($(this).val() === "") {
+						display.removeClass("");
+						elem.val("");
+						input.val("");
+						display.val("");
+						elem.val("");
+						elem.trigger("change");
+						return;
+					}
+					
 					var date = moment($(this).val(), "YYYY-MM-DD");
 					var val;
 					
@@ -63,14 +99,26 @@
 				});
 			} else {
 				// pikaday
-				var input = $("<input type='text' class='pikaday-display' placeholder='"+settings.placeholder+"' />")
+				isPikaday = true;
+				
+				input = $("<input type='text' class='pikaday-display "+settings.classes+"' placeholder='"+settings.placeholder+"' />");
 				container.append(input);
-				var picker = new Pikaday({
+				picker = new Pikaday($.extend({}, settings.pikadayOptions, {
 					field: $(input)[0],
-					format: settings.displayFormat,
-				});
+					format: settings.displayFormat
+				}));
 				
 				input.change(function() {
+					// If is empty
+					if($(this).val() === "") {
+						input.removeClass("is-invalid");
+						elem.val("");
+						input.val("");
+						elem.val("");
+						elem.trigger("change");
+						return;
+					}
+					
 					var date = moment($(this).val(), settings.displayFormat);
 					var val;
 					
@@ -98,9 +146,27 @@
 					elem.trigger("change");
 				});
 			}
+			
+			// Add clear or today buttons
+			if(settings.showClearButton) {
+				var clearBtn = $("<button class='pikaday-clear-btn'></button");
+				clearBtn.html(settings.clearButtonText);
+				container.append(clearBtn);
+				clearBtn.click(function() {
+					self.clearDate();
+				});
+			}
+			
+			if(settings.showTodayButton) {
+				var todayBtn = $("<button class='pikaday-today-btn' ></button");
+				todayBtn.html(settings.todayButtonText);
+				container.append(todayBtn);
+				todayBtn.click(function() {
+					self.gotoToday();
+				});
+			}
 
 		});
-
 	};
 
 	$.fn.pikaday.defaults = {
@@ -109,7 +175,13 @@
 		hasTouch: Modernizr.touch,
 		hasNativeDate: Modernizr.inputtypes.date,
 		forcePikaday: false,
-		placeholder: ""
+		placeholder: "",
+		classes: "",
+		pikadayOptions: {},
+		showTodayButton: false,
+		showClearButton: false,
+		todayButtonText: "Today",
+		clearButtonText: "Clear",
 	};
 
 }(jQuery));

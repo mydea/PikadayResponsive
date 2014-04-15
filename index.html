@@ -75,7 +75,7 @@
 		<p id="output2" class="output"></p>
 		
 		<h1>Change display format</h1>
-		<p>You can also specifiy the display format as you wish. E.g. "Do MMM YYYY"</p>
+		<p>You can also specifiy the display format as you wish. E.g. "Do MMM YYYY" and set additional Pikaday-Options like minDate.</p>
 		<p>
 			<label for="date3">Select a date:</label>
 			<input name="date" type="date" id="date3" />
@@ -85,7 +85,9 @@
 		<p id="output3" class="output"></p>
 
 		<script src="libs/jquery-2.1.0.min.js"></script>
-		<script src="pikaday/pikaday-package.js"></script>
+		<script src="libs/moment-2.6.0.min.js"></script>
+		<script src="pikaday/pikaday.js"></script>
+		<script src="pikaday/pikaday-responsive.jquery.js"></script>
 
 		<script>
 			// Default values
@@ -112,7 +114,13 @@
 			// Change input format
 			var d3 = $("#date3").pikaday({
 				displayFormat: "Do MMMM YYYY", // default: "DD.MM.YYYY"
-				placeholder: "enter date"
+				placeholder: "enter date",
+				pikadayOptions: {
+					//minDate: new Date()
+				},
+				classes: "a-special-class",
+				showClearButton: true,
+				showTodayButton: true
 			});
 
 			// Test to show the output value

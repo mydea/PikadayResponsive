@@ -53,6 +53,8 @@ As mentioned above, you can also use head.js or another feature detection librar
     <script src="libs/jquery-2.1.0.min.js"></script>
     <script src="pikaday/pikaday-package.js"></script>
 
+Don't forget to also include Modernizr (or another feature detection library). Normally, these libraries are loaded in the HTML head-section.
+
 The CSS-file contains the basic styles for the Pikaday-Datepicker. You can change/overwrite them as you wish.
 
 To use it, call the following on an input field:
@@ -74,7 +76,13 @@ There are some options to configure PikadayResponsive. Following are the default
         hasTouch: Modernizr.touch,
         hasNativeDate: Modernizr.inputtypes.date,
         forcePikaday: false,
-        placeholder: ""
+        placeholder: "",
+        classes: "",
+        pikadayOptions: {},
+        showTodayButton: false,
+        showClearButton: false,
+        todayButtonText: "Today",
+        clearButtonText: "Clear"
     });
 
 ###displayFormat
@@ -90,17 +98,29 @@ Determines the output of the field. Basically, this is what you will get if you 
 ###placeholder
 The placeholder for the input-field.
 
+###classes
+A string with classes that should be added to the displayed input-fields
+
+###pikadayOptions
+An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
+
 ###hasTouch / hasNativeDate
 You can overwrite this if you don't want to use Modernizr, or to overwrite it if needed. 
 
 ###forcePikaday
 If set to true, Pikaday will always be displayed, no matter the device type.
 
+###showTodayButton / showClearButton
+If set to true, a button will be displayed which enables the user to clear the date or to set it to today.
+If both are set to true, two buttons will be displayed. You can style them via CSS.
+
+###todayButtonText / clearButtonText
+You can change the text of the clear/today buttons. Defaults are ```Clear``` and ```Today```.
+
 ##Todo
 The following features will will be added in the near future:
 
-* The possibility to manually configure Pikaday
-* Additional function to clear the input field
+* Cross-Browser testing
 
 ##Author
 PikadayResponsive has been created by Francesco Novy | http://www.fnovy.com | francesconovy@gmail.com | @_fnovy
