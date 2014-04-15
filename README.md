@@ -5,13 +5,15 @@ A responsive datepicker built on top of Pikaday. It shows the native datepicker 
 
 Pikaday is a nice and lean datepicker. For more details, see here: https://github.com/dbushell/Pikaday
 
+Try the demo: http://fnovy.com/projects/PikadayResponsive/
+
 ##Why?
 Pikaday is a great datepicker, and there are a lot of other datepickers out there that work really well. However, all of them fall short when used on a mobile device, where the native datepickers work best (because they have been specifically optimised for the mobile experience). Native Datepickers have some drawbacks, though:
 
 * The output format cannot be customized
 * While they work quite reliably on mobile devices, support on desktop devices is either non-existing (Firefox) or rather ugly (Chrome).
 
-Because of this, I set out to create a "truly" responsive datepicker. 
+PikadayResponsive tries to solve this problem.
 
 ##How it works
 Basically, PikadayResponsive tries to detect if you are on a mobile device. For this, Modernizr is used (altough you can choose to use a different feature detection library if you want). It checks for touch and HTML5 input-type date support, and if one of them is missing, it simply displays a Pikaday-datepicker.

@@ -58,6 +58,8 @@
 						}
 						elem.val(val);
 					}
+					
+					elem.trigger("change");
 				});
 			} else {
 				// pikaday
