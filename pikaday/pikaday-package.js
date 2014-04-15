@@ -1,3 +1,11 @@
+/*! 
+ * PikadayResponsive 
+ * 
+ * author: Francesco Novy 
+ * licence: MIT license 
+ * https://github.com/mydea/PikadayResponsive 
+ */
+
 //! moment.js
 //! version : 2.6.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors

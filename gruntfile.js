@@ -4,6 +4,9 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		concat: {
+			options: {
+				banner: "/*! \n * PikadayResponsive \n * \n * author: Francesco Novy \n * licence: MIT license \n * https://github.com/mydea/PikadayResponsive \n */\n\n",
+			},
 			app: {
 				src: ['libs/moment-2.6.0.min.js', 'pikaday/pikaday.min.js', 'pikaday/pikaday-responsive.jquery.min.js'],
 				dest: 'pikaday/pikaday-package.js'
