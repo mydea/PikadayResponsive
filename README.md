@@ -92,6 +92,12 @@ You can overwrite this if you don't want to use Modernizr, or to overwrite it if
 ###forcePikaday
 If set to true, Pikaday will always be displayed, no matter the device type.
 
+##Todo
+The following features will will be added in the near future:
+
+* The possibility to manually configure Pikaday
+* Additional function to clear the input field
+
 ##Author
 PikadayResponsive has been created by Francesco Novy | http://www.fnovy.com | francesconovy@gmail.com | @_fnovy
 
