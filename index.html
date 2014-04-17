@@ -75,7 +75,7 @@
 		<p id="output2" class="output"></p>
 		
 		<h1>Change display format</h1>
-		<p>You can also specifiy the display format as you wish. E.g. "Do MMM YYYY" and set additional Pikaday-Options like minDate.</p>
+		<p>You can also specifiy the display format as you wish. E.g. "Do MMM YYYY" or display clear/today buttons.</p>
 		<p>
 			<label for="date3">Select a date:</label>
 			<input name="date" type="date" id="date3" />
@@ -115,9 +115,6 @@
 			var d3 = $("#date3").pikaday({
 				displayFormat: "Do MMMM YYYY", // default: "DD.MM.YYYY"
 				placeholder: "enter date",
-				pikadayOptions: {
-					//minDate: new Date()
-				},
 				classes: "a-special-class",
 				showClearButton: true,
 				showTodayButton: true

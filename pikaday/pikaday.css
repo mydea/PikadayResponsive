@@ -195,7 +195,9 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 }
 
 /* Height and width has to be equal! */
-.pikaday-display, .pikaday-invisible {}
+.pikaday-display, .pikaday-invisible {
+	width: 120px;
+}
 
 .pikaday-display-native {
 	pointer-events: none;
