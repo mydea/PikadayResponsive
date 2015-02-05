@@ -35,6 +35,10 @@ PikadayResponsive needs the following components to work:
 You can also use pikaday-package.js, which includes Moment.js and Pikaday. It does not, however, contain jQuery and Modernizr - you have to add them manually.
 
 ##Usage
+You can install PikadayResponsive via Bower:
+
+    bower install pikaday-responsive --save
+
 You will need to include the following scripts at the bottom of your site:
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
