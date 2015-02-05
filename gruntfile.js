@@ -5,24 +5,36 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		concat: {
 			options: {
-				banner: "/*! \n * PikadayResponsive \n * \n * author: Francesco Novy \n * licence: MIT license \n * https://github.com/mydea/PikadayResponsive \n */\n\n",
+				banner: "/*! \n * PikadayResponsive \n * \n * author: Francesco Novy \n * licence: MIT license \n * https://github.com/mydea/PikadayResponsive \n */\n\n"
 			},
 			app: {
-				src: ['libs/moment-2.6.0.min.js', 'pikaday/pikaday.min.js', 'pikaday/pikaday-responsive.jquery.min.js'],
-				dest: 'pikaday/pikaday-package.js'
+				src: ['bower_components/momentjs/moment.js', 'bower_components/pikaday/pikaday.js', 'pikaday-responsive/pikaday-responsive.jquery.min.js'],
+				dest: 'pikaday-responsive/pikaday-package.js'
+			},
+			css: {
+				src: ["bower_components/pikaday/css/pikaday.css", "pikaday-responsive/css/pikaday-responsive.css"],
+				dest: "pikaday-responsive/css/pikaday-package.css"
 			}
 		},
 		uglify: {
 			options: {
-				mangle: false
-			},
-			pikaday: {
-				src: 'pikaday/pikaday.js',
-				dest: 'pikaday/pikaday.min.js'
+				mangle: false,
+				banner: "/*! \n * PikadayResponsive \n * \n * author: Francesco Novy \n * licence: MIT license \n * https://github.com/mydea/PikadayResponsive \n */\n\n"
 			},
 			pikadayResponsive: {
-				src: 'pikaday/pikaday-responsive.jquery.js',
-				dest: 'pikaday/pikaday-responsive.jquery.min.js'
+				src: 'pikaday-responsive/pikaday-responsive.jquery.js',
+				dest: 'pikaday-responsive/pikaday-responsive.jquery.min.js'
+			}
+		},
+		sass: {
+			dist: {
+				options: {
+					style: 'expanded',
+					banner: "/*! \n * PikadayResponsive \n * \n * author: Francesco Novy \n * licence: MIT license \n * https://github.com/mydea/PikadayResponsive \n */\n\n"
+				},
+				files: {
+					'pikaday-responsive/css/pikaday-responsive.css': 'pikaday-responsive/css/scss/pikaday-responsive.scss'
+				}
 			}
 		}
 
@@ -31,8 +43,9 @@ module.exports = function(grunt) {
 	// 3. Where we tell Grunt we plan to use this plug-in.
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 	
 	// 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-	grunt.registerTask('default', ["uglify", "concat"]);
+	grunt.registerTask('default', ["sass", "uglify", "concat"]);
 
 };

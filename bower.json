@@ -1,0 +1,30 @@
+{
+  "name": "pikaday-responsive",
+  "version": "0.5.0",
+  "homepage": "https://github.com/mydea/PikadayResponsive",
+  "authors": [
+    "Francesco Novy <francesconovy@gmail.com>"
+  ],
+  "description": "A wrapper for Pikaday which shows a native datepicker on mobile devices and Pikaday on desktops.",
+  "main": "pikaday-responsive/pikaday-responsive.jquery.js",
+  "keywords": [
+    "Pikaday",
+    "responsive",
+    "datepicker",
+    "date"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "momentjs": "~2.9.0",
+    "pikaday": "~1.3.1",
+    "modernizr": "~2.8.3"
+  }
+}

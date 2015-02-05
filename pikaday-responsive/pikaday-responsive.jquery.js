@@ -2,7 +2,7 @@
  * PikadayResponsive
  *
  * Copyright © 2014 Francesco Novy | MIT license | https://github.com/mydea/PikadayResponsive
- * Version 0.1
+ * Version 0.5
  */
 (function($) {
 
@@ -13,13 +13,13 @@
 			var elem, input, container, self, picker, isPikaday;
 			elem = $(this);
 			self = this;
-			
+
 			this.clearDate = function() {
 				$(this).parent(".pikaday-container").children("input").each(function() {
 					$(this).val("").trigger("change");
 				});
 			};
-			
+
 			this.gotoToday = function() {
 				if(isPikaday) {
 					$(this).siblings(".pikaday-display").val(moment().format(settings.displayFormat)).trigger("change");
@@ -28,14 +28,14 @@
 					$(this).siblings(".pikaday-invisible").val(moment().format("YYYY-MM-DD")).trigger("change");
 				}
 			};
-			
+
 			// Check if is input-field
 			if(elem.prop("tagName") !== "INPUT") {
 				console.error("Pikaday can only be intitialized on input-fields! Tried to initialized on: ");
 				console.error(elem);
 				return;
 			}
-			
+
 			// Original Input-Field is hidden and will contain the final output value
 			elem.attr("type", "hidden");
 			// Wrap the input in a container
@@ -47,16 +47,16 @@
 			if(!settings.forcePikaday && (settings.hasTouch && settings.hasNativeDate)) {
 				// Native datepicker
 				isPikaday = false;
-				
+
 				// The following element will be read-only and click-through 
 				// and will only be used to display the formatted date
 				var display = $("<input type='text' readonly class='pikaday-display pikaday-display-native "+settings.classes+"' placeholder='"+settings.placeholder+"' />");
 				container.append(display);
-				
+
 				// The actual input field
 				input = $("<input type='date' class='pikaday-invisible' />");
 				container.append(input);
-				
+
 				input.change(function() {
 					// If is empty
 					if($(this).val() === "") {
@@ -68,10 +68,10 @@
 						elem.trigger("change");
 						return;
 					}
-					
+
 					var date = moment($(this).val(), "YYYY-MM-DD");
 					var val;
-					
+
 					if (!date.isValid() || date.unix() < 0) {
 						// Date is not valid
 						display.addClass("is-invalid");
@@ -81,9 +81,9 @@
 					} else {
 						// Date is valid
 						display.removeClass("is-invalid");
-						
+
 						display.val(date.format(settings.displayFormat));
-						
+
 						// Output format can be unix, input or a Moment.js string
 						if(settings.outputFormat === "unix") {
 							val = date.unix();
@@ -94,34 +94,61 @@
 						}
 						elem.val(val);
 					}
-					
+
 					elem.trigger("change");
 				});
 			} else {
 				// pikaday
 				isPikaday = true;
-				
+				var pikadayChanged = false;
+
 				input = $("<input type='text' class='pikaday-display "+settings.classes+"' placeholder='"+settings.placeholder+"' />");
 				container.append(input);
 				picker = new Pikaday($.extend({}, settings.pikadayOptions, {
 					field: $(input)[0],
 					format: settings.displayFormat
+					//setDefaultDate: elem.val() ? moment.unix(elem.val()).format("YYYY-MM-DD") :
 				}));
-				
+
+				if(elem.val()) {
+					picker.setMoment(moment.unix(elem.val()));
+				}
+
+				elem.on("change", function() {
+					if(pikadayChanged) {
+						pikadayChanged = false;
+						return;
+					}
+					pikadayChanged = false;
+					var val = $(this).val();
+					if(!val) {
+						return;
+					}
+
+					//input.val(moment.unix(val).format(settings.displayFormat));
+					picker.setMoment(moment.unix(val));
+				});
+
 				input.change(function() {
+					pikadayChanged = true;
 					// If is empty
-					if($(this).val() === "") {
+					if($(this).val() === "" || $(this).val() === 0) {
 						input.removeClass("is-invalid");
 						elem.val("");
 						input.val("");
 						elem.val("");
 						elem.trigger("change");
+						elem.addClass("is-empty");
+						elem.parent().addClass("is-empty");
 						return;
 					}
-					
+
+					elem.removeClass("is-empty");
+					elem.parent().removeClass("is-empty");
+
 					var date = moment($(this).val(), settings.displayFormat);
 					var val;
-					
+
 					if (!date.isValid() || date.unix() < 0) {
 						// Date is not valid
 						input.addClass("is-invalid");
@@ -131,7 +158,7 @@
 					} else {
 						// Date is valid
 						input.removeClass("is-invalid");
-						
+
 						// Output format can be unix, input or a Moment.js string
 						if(settings.outputFormat === "unix") {
 							val = date.unix();
@@ -142,27 +169,32 @@
 						}
 						elem.val(val);
 					}
-					
+
 					elem.trigger("change");
 				});
 			}
-			
+
 			// Add clear or today buttons
 			if(settings.showClearButton) {
-				var clearBtn = $("<button class='pikaday-clear-btn'></button");
+				var clearBtn = $("<button class='pikaday-clear-btn'></button>");
 				clearBtn.html(settings.clearButtonText);
 				container.append(clearBtn);
-				clearBtn.click(function() {
+				input.trigger("change");
+				clearBtn.click(function(e) {
 					self.clearDate();
+					e.preventDefault();
+					return false;
 				});
 			}
-			
+
 			if(settings.showTodayButton) {
-				var todayBtn = $("<button class='pikaday-today-btn' ></button");
+				var todayBtn = $("<button class='pikaday-today-btn' ></button>");
 				todayBtn.html(settings.todayButtonText);
 				container.append(todayBtn);
 				todayBtn.click(function() {
 					self.gotoToday();
+					e.preventDefault();
+					return false;
 				});
 			}
 
@@ -181,7 +213,7 @@
 		showTodayButton: false,
 		showClearButton: false,
 		todayButtonText: "Today",
-		clearButtonText: "Clear",
+		clearButtonText: "Clear"
 	};
 
 }(jQuery));

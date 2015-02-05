@@ -5,11 +5,11 @@ A responsive datepicker built on top of Pikaday. It shows the native datepicker 
 
 Pikaday is a nice and lean datepicker. For more details, see here: https://github.com/dbushell/Pikaday
 
-Try the demo: http://fnovy.com/projects/PikadayResponsive/
+Try the demo: http://fnovy.com/projects/pikaday-responsive/
 
 Try it on mobile, too:
 
-![PikadayResponsive Demo](https://api.qrserver.com/v1/create-qr-code/?data=http%3A%2F%2Ffnovy.com%2Fprojects%2FPikadayResponsive%2F&size=220x220&margin=0)
+![PikadayResponsive Demo](https://api.qrserver.com/v1/create-qr-code/?data=http%3A%2F%2Ffnovy.com%2Fprojects%2Fpikaday-responsive%2F&size=220x220&margin=0)
 
 ##Why?
 Pikaday is a great datepicker, and there are a lot of other datepickers out there that work really well. However, all of them fall short when used on a mobile device, where the native datepickers work best (because they have been specifically optimised for the mobile experience). Native Datepickers have some drawbacks, though:
@@ -32,28 +32,28 @@ PikadayResponsive needs the following components to work:
 * Pikaday (https://github.com/dbushell/Pikaday)
 * Modernizr or other feature detection library
 
+You can also use pikaday-package.js, which includes Moment.js and Pikaday. It does not, however, contain jQuery and Modernizr - you have to add them manually.
 
 ##Usage
 You will need to include the following scripts at the bottom of your site:
 
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="pikaday-responsive/pikaday-package.js"></script>
 
-    <script src="libs/jquery-2.1.0.min.js"></script>
-    <script src="libs/moment-2.6.0.min.js"></script>
-    <script src="pikaday/pikaday.js"></script>
-    <script src="pikaday-responsive.jquery.js"></script>
+or alternatively:
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/momentjs/moment.js"></script>
+    <script src="bower_components/pikaday/pikaday.js"></script>
+    <script src="pikaday-responsive/pikaday-responsive.jquery.min.js"></script>
 
 
 And in the head-section
 
-    <link rel="stylesheet" href="pikaday/pikaday.css">
-    <script src="libs/modernizr-custom.js"></script>
+    <link rel="stylesheet" href="pikaday-responsive/pikaday-package.css">
+    <script src="bower_components/modernizr/modernizr.js"></script>
 
-As mentioned above, you can also use head.js or another feature detection library instead of Moderizr. If you want, you can also use the pikaday-package.js file, which includes Moment.js, Pikaday and PikadayResponsive (it is also minified):
-
-    <script src="libs/jquery-2.1.0.min.js"></script>
-    <script src="pikaday/pikaday-package.js"></script>
-
-Don't forget to also include Modernizr (or another feature detection library). Normally, these libraries are loaded in the HTML head-section.
+As mentioned above, you can also use head.js or another feature detection library instead of Moderizr.
 
 The CSS-file contains the basic styles for the Pikaday-Datepicker. You can change/overwrite them as you wish.
 
@@ -117,10 +117,15 @@ If both are set to true, two buttons will be displayed. You can style them via C
 ###todayButtonText / clearButtonText
 You can change the text of the clear/today buttons. Defaults are ```Clear``` and ```Today```.
 
-##Todo
-The following features will will be added in the near future:
+##Changelog
+v0.5.0 (February 5th 2015)
 
-* Cross-Browser testing
+* Moved dependencies to bower
+* Released pikaday-responsive on bower
+* Improved demo
+* Fixed bug with changing value after initialisation
+* Added seperate .scss and .css files with updated pikaday-responsive styles
+* Some other minor fixes / restructuring
 
 ##Author
 PikadayResponsive has been created by Francesco Novy | http://www.fnovy.com | francesconovy@gmail.com | @_fnovy
@@ -132,4 +137,4 @@ Credits go to David Bushell and Ramiro Rikkert for creating Pikaday.
 * Ramiro Rikkert GitHub @RamRik
 
 ##Copyright
-Copyright © 2014 Francesco Novy | MIT license
+Copyright © 2015 Francesco Novy | MIT license
