@@ -50,7 +50,8 @@
 
 				// The following element will be read-only and click-through 
 				// and will only be used to display the formatted date
-				var display = $("<input type='text' readonly class='pikaday-display pikaday-display-native "+settings.classes+"' placeholder='"+settings.placeholder+"' />");
+				var originalClasses = elem.attr("class");
+				var display = $("<input type='text' readonly class='pikaday-display pikaday-display-native "+settings.classes+" "+originalClasses+"' placeholder='"+settings.placeholder+"' />");
 				container.append(display);
 
 				// The actual input field
@@ -102,7 +103,8 @@
 				isPikaday = true;
 				var pikadayChanged = false;
 
-				input = $("<input type='text' class='pikaday-display "+settings.classes+"' placeholder='"+settings.placeholder+"' />");
+				var originalClasses = elem.attr("class");
+				input = $("<input type='text' class='pikaday-display "+settings.classes+""+originalClasses+"' placeholder='"+settings.placeholder+"' />");
 				container.append(input);
 				picker = new Pikaday($.extend({}, settings.pikadayOptions, {
 					field: $(input)[0],
