@@ -122,6 +122,11 @@ If both are set to true, two buttons will be displayed. You can style them via C
 You can change the text of the clear/today buttons. Defaults are ```Clear``` and ```Today```.
 
 ##Changelog
+v0.5.3 (August 6th 2015)
+
+* Update dependencies
+* Check for windows as operating system to show Pikaday on touch-enabled laptops
+
 v0.5.0 (February 5th 2015)
 
 * Moved dependencies to bower
