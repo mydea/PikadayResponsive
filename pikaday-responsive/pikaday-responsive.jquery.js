@@ -2,7 +2,7 @@
  * PikadayResponsive
  *
  * Copyright © 2014 Francesco Novy | MIT license | https://github.com/mydea/PikadayResponsive
- * Version 0.5
+ * Version 0.5.3
  */
 (function($) {
 
@@ -206,7 +206,7 @@
 	$.fn.pikaday.defaults = {
 		displayFormat: "DD.MM.YYYY",
 		outputFormat: "unix",
-		hasTouch: Modernizr.touch,
+		hasTouch:  Modernizr.touch && navigator.appVersion.indexOf("Win") === -1, // Only if not windows
 		hasNativeDate: Modernizr.inputtypes.date,
 		forcePikaday: false,
 		placeholder: "",

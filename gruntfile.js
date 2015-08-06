@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 				banner: "/*! \n * PikadayResponsive \n * \n * author: Francesco Novy \n * licence: MIT license \n * https://github.com/mydea/PikadayResponsive \n */\n\n"
 			},
 			app: {
-				src: ['bower_components/momentjs/moment.js', 'bower_components/pikaday/pikaday.js', 'pikaday-responsive/pikaday-responsive.jquery.min.js'],
+				src: ['bower_components/momentjs/moment.js', 'bower_components/pikaday/pikaday.js', 'pikaday-responsive/pikaday-responsive.jquery.js'],
 				dest: 'pikaday-responsive/pikaday-package.js'
 			},
 			css: {
