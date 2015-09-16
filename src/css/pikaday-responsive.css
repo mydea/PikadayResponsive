@@ -7,43 +7,37 @@
  */
 
 
-.pikaday-container {
+.pikaday__container {
   display: inline-block;
   position: relative;
 }
 
 /* Height and width has to be equal! */
-.pikaday-display, .pikaday-invisible {
+.pikaday__display, .pikaday__invisible {
   width: 100%;
 }
 
-.pikaday-display-native {
+.pikaday__display--native {
   pointer-events: none;
   cursor: pointer;
 }
 
-.pikaday-display.is-invalid {
+.pikaday__display.is-invalid {
   background: rgba(255, 0, 0, 0.05);
 }
 
-.pikaday-invisible {
+.pikaday__invisible {
   opacity: 0;
+  color: transparent;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   position: absolute;
   display: block;
   left: 0;
   top: 0;
   height: 100%;
   width: 100%;
-}
-
-.pikaday-container .pikaday-clear-btn {
-  transition: 0.2s all ease-in-out;
-  opacity: 1;
-}
-
-.pikaday-container .is-empty .pikaday-clear-btn {
-  opacity: 0;
-  pointer-events: none;
 }
 
 /*# sourceMappingURL=pikaday-responsive.css.map */

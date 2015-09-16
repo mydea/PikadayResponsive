@@ -11,7 +11,7 @@ Try it on mobile, too:
 
 ![PikadayResponsive Demo](https://api.qrserver.com/v1/create-qr-code/?data=http%3A%2F%2Ffnovy.com%2Fprojects%2Fpikaday-responsive%2F&size=220x220&margin=0)
 
-##Why?
+## Why?
 Pikaday is a great datepicker, and there are a lot of other datepickers out there that work really well. However, all of them fall short when used on a mobile device, where the native datepickers work best (because they have been specifically optimised for the mobile experience). Native Datepickers have some drawbacks, though:
 
 * The output format cannot be customized
@@ -19,12 +19,29 @@ Pikaday is a great datepicker, and there are a lot of other datepickers out ther
 
 PikadayResponsive tries to solve this problem.
 
-##How it works
+## How it works
 Basically, PikadayResponsive tries to detect if you are on a mobile device. For this, Modernizr is used (altough you can choose to use a different feature detection library if you want). It checks for touch and HTML5 input-type date support, and if one of them is missing, it simply displays a Pikaday-datepicker.
 
 If, however, touch AND HTML5-date support are detected, it will instead display a native input type="date". Over this native input field, another, readonly and click-trough input field is displayed, in which a formatted date is displayed.
 
-##Dependencies
+## Updating to 0.6.0
+PikadayResponsive was completely re-written for v0.6.0 and the API changed quite a bit for this version. If you want to update from < 0.6.0 to >= 0.6.0, follow these steps:
+
+* Instead of `$("#my-element").pikaday()`, you have to instantiate it with `var dateInstance = pikadayResponsive(document.getElementById("my-element"), options);`
+* The available options changed a bit. See the *Configuration* section for details about the available options. 
+* The *clear* and *today* buttons have been removed. If you need this functionality, it is easy to implement it yourself with the new `dateInstance.setDate()` function.
+* The `displayFormat` option has been renamed to `format`. Both `format` and `outputFormat` now only take Moment.js-formats as parameters. If you want to use an UNIX-timestamp, you cans imply use `X`.
+
+It is not possible anymore to instantiate pikadayResponsive for a collection. You have to do this in a loop:
+
+```js
+$elements = $(".input");
+$elements.each(function() {
+    pikadayResponsive($(this));
+});
+```
+
+## Dependencies
 PikadayResponsive needs the following components to work:
 
 * jQuery
@@ -34,28 +51,35 @@ PikadayResponsive needs the following components to work:
 
 You can also use pikaday-package.js, which includes Moment.js and Pikaday. It does not, however, contain jQuery and Modernizr - you have to add them manually.
 
-##Usage
+## Usage
 You can install PikadayResponsive via Bower:
 
-    bower install pikaday-responsive --save
+```console
+bower install pikaday-responsive --save
+```
 
 You will need to include the following scripts at the bottom of your site:
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="pikaday-responsive/pikaday-package.js"></script>
+```html
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/pikaday-responsive/dist/pikaday-package.js"></script>
+```
 
 or alternatively:
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/momentjs/moment.js"></script>
-    <script src="bower_components/pikaday/pikaday.js"></script>
-    <script src="pikaday-responsive/pikaday-responsive.jquery.min.js"></script>
-
+```html
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/momentjs/moment.js"></script>
+<script src="bower_components/pikaday/pikaday.js"></script>
+<script src="bower_components/pikaday-responsive/dist/pikaday-responsive.js"></script>
+```
 
 And in the head-section
 
-    <link rel="stylesheet" href="pikaday-responsive/pikaday-package.css">
-    <script src="bower_components/modernizr/modernizr.js"></script>
+```html
+<link rel="stylesheet" href="bower_components/pikaday-responsive/dist/pikaday-package.css">
+<script src="bower_components/modernizr/modernizr.js"></script>
+```
 
 As mentioned above, you can also use head.js or another feature detection library instead of Moderizr.
 
@@ -65,63 +89,105 @@ To use it, call the following on an input field:
 
 HTML:
 
-    <input id="date" name="date" />
+```html
+<input id="date" name="date" />
+```
 
 JS:
 
-    $("#date").pikaday();
+```js
+var dateObject = pikadayResponsive(document.getElementbyId("date"));
+```
 
-##Configuration
+The `dateObject` returned from `pikadayResponsive()` is a POJO (plain old JavaScript object) with the following properties:
+
+```javascript
+dateObject = {
+    pikaday: null, // This is either null (if native date is used) or the Pikaday-instance
+    element: input#date1, // The original element
+    value: "2015-10-20", // The current value of the input. This is the date formatted with outputFormat
+    date: Object, // The Moment.js-Date-Object of the current value
+}
+```
+
+In addition, the dateObject has a function: `setDate()`. This function takes either a Moment.js object, a native JS-Date or a string in the specified `outputFormat`.
+The input will be set to this value (no matter if it is a native date picker or a Pikaday picker) and a change-event will be triggered.
+If you call `dateObject.setDate(null)`, the field will be cleared. If you want to set the picker to the current day, you can simply call `dateObject.setDate(moment())`.
+
+Whenever the input changes, the value on the original input will be updated as well and a regular `change` event will be triggered.
+Additonally, a `change-date` event will be triggered on the original input. This event receives the dateObject as its second parameter:
+
+```js
+var el = document.getElementById("date1");
+var dateObject = pikadayResponsive(el);
+$(el).on("change-date", function(e, dateObject) {
+    // do something with the dateObject
+});
+```
+
+Note that the date object is always the same object and that it will automatically update its value/date:
+
+```js
+var el = document.getElementById("date1");
+var dateObject = pikadayResponsive(el);
+console.log(dateObject.value); // null
+
+// The user enters "2015-10-5" in the input field
+console.log(dateObject.value); // 2015-10-5
+```
+
+## Configuration
 There are some options to configure PikadayResponsive. Following are the default-values:
 
-    $("#date").pikaday({
-        displayFormat: "DD.MM.YYYY",
-        outputFormat: "unix",
-        hasTouch: Modernizr.touch,
-        hasNativeDate: Modernizr.inputtypes.date,
-        forcePikaday: false,
-        placeholder: "",
-        classes: "",
-        pikadayOptions: {},
-        showTodayButton: false,
-        showClearButton: false,
-        todayButtonText: "Today",
-        clearButtonText: "Clear"
-    });
+```js
+pikadayResponsive(document.getElementById("date1"), {
+    format: "DD.MM.YYYY",
+    outputFormat: "x",
+    checkIfNativeDate: function() {
+        // return true if native date field should be used
+    },
+    placeholder: "",
+    classes: "",
+    pikadayOptions: {}
+});
+```
 
-###displayFormat
-Determines how a date will be displayed in the input-field. Has to be a Moment.js format-string, like ```DD.MM.YYYY```
+### format
+Determines how a date will be displayed in the input-field. Has to be a Moment.js format-string, like `DD.MM.YYYY`. 
+See [Moment.js Docs](http://momentjs.com/docs/#/displaying/) for all available options.
 
-###outputFormat
-Determines the output of the field. Basically, this is what you will get if you call ```$("#date").val()```or if you submit the form. Can be:
+### outputFormat
+Determines the output of the field. Basically, this is what you will get if you call `$("#date").val()` or if you submit the form. has to be a Moment.js format-string, like "YYYY-MM-DD".
+See [Moment.js Docs](http://momentjs.com/docs/#/displaying/) for all available options.
 
-* ```unix```(default): The unix-timestamp (note that this is NOT the JavaScript-timestamp. If you want the JS-timestamp, you will need to multiply this with 1000)
-* ```input```: This will output the input directly. E.g. for native date-field it will output the format "YYYY-MM-DD", for pikaday it will output the ```displayFormat```.
-* If it is neither ```unix``` nor ```input```, it will be parsed as a Moment.js date-format string, e.g. ```Do MMM YYYY```
-
-###placeholder
+### placeholder
 The placeholder for the input-field.
 
-###classes
+### classes
 A string with classes that should be added to the displayed input-fields
 
-###pikadayOptions
+### checkIfNativeDate
+You can overwrite this, for example if you don't want to use Modernizr. This has to be a function. 
+If this function returns true, the native date picker will be used, otherwise Pikaday will be used.
+By default, the following function is used:
+
+```js
+function () {
+    return Modernizr.inputtypes.date && (Modernizr.touch && navigator.appVersion.indexOf("Win") === -1);
+}
+```
+
+### pikadayOptions
 An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
 
-###hasTouch / hasNativeDate
-You can overwrite this if you don't want to use Modernizr, or to overwrite it if needed. 
+## Changelog
+v0.6.0
 
-###forcePikaday
-If set to true, Pikaday will always be displayed, no matter the device type.
+* Complete re-write of the library
+* Remove integrated today/clear buttons
+* Make the function return a dateObject to work with
+* Add `change-date` event to input-field which receives the dateObject
 
-###showTodayButton / showClearButton
-If set to true, a button will be displayed which enables the user to clear the date or to set it to today.
-If both are set to true, two buttons will be displayed. You can style them via CSS.
-
-###todayButtonText / clearButtonText
-You can change the text of the clear/today buttons. Defaults are ```Clear``` and ```Today```.
-
-##Changelog
 v0.5.3 (August 6th 2015)
 
 * Update dependencies
@@ -136,14 +202,14 @@ v0.5.0 (February 5th 2015)
 * Added seperate .scss and .css files with updated pikaday-responsive styles
 * Some other minor fixes / restructuring
 
-##Author
+## Author
 PikadayResponsive has been created by Francesco Novy | http://www.fnovy.com | francesconovy@gmail.com | @_fnovy
 
-##Credits
+## Credits
 Credits go to David Bushell and Ramiro Rikkert for creating Pikaday.
 
 * David Bushell http://dbushell.com @dbushell
 * Ramiro Rikkert GitHub @RamRik
 
-##Copyright
+## Copyright
 Copyright © 2015 Francesco Novy | MIT license

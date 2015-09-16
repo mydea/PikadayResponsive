@@ -1,14 +1,3 @@
-/*! 
- * PikadayResponsive 
- * A responsive datepicker built on top of Pikaday. It shows the native datepicker on mobile devices and a nice JS-picker on desktop. 
- * 
- * @author: Francesco Novy 
- * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
- * @link https://github.com/mydea/PikadayResponsive 
- * @copyright: (c) 2015 
- * @version: 0.6.0 
- */ 
-
 @charset "UTF-8";
 
 /*!
@@ -233,11 +222,14 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 
 /*! 
  * PikadayResponsive 
+ * A responsive datepicker built on top of Pikaday. It shows the native datepicker on mobile devices and a nice JS-picker on desktop. 
  * 
- * author: Francesco Novy 
- * licence: MIT license 
- * https://github.com/mydea/PikadayResponsive 
- */
+ * @author: Francesco Novy 
+ * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
+ * @link https://github.com/mydea/PikadayResponsive 
+ * @copyright: (c) 2015 
+ * @version: 0.6.0 
+ */ 
 
 
 .pikaday__container {
@@ -272,5 +264,3 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   height: 100%;
   width: 100%;
 }
-
-/*# sourceMappingURL=pikaday-responsive.css.map */
