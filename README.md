@@ -181,6 +181,10 @@ function () {
 An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
 
 ## Changelog
+v0.6.1
+
+* Change jQuery dependency to use v1.11.3 or greater
+
 v0.6.0
 
 * Complete re-write of the library
