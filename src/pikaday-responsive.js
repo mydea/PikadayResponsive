@@ -133,8 +133,12 @@
                     obj.value *= 1;
                 }
                 $el.val(obj.value);
-                $el.trigger("change");
-                $el.trigger("change-date", [obj]);
+
+                // Wait 1ms in order to circumvent bug where events weren't triggered
+                setTimeout(function() {
+                    $el.trigger("change");
+                    $el.trigger("change-date", [obj]);
+                }, 1);
             });
         }
 
@@ -178,6 +182,10 @@
 
             return date;
         };
+
+        if($el.val()) {
+            setDate($el.val());
+        }
 
         obj.setDate = setDate;
 

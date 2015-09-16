@@ -136,6 +136,9 @@ console.log(dateObject.value); // null
 console.log(dateObject.value); // 2015-10-5
 ```
 
+Note that the fields will not be updated automatically if you change the value programmatically. 
+You have to update the date with `setDate()` in order for it to take effect.
+
 ## Configuration
 There are some options to configure PikadayResponsive. Following are the default-values:
 
@@ -181,6 +184,10 @@ function () {
 An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
 
 ## Changelog
+v0.6.2
+
+* Initial values of inputs should be set when initialising
+
 v0.6.1
 
 * Change jQuery dependency to use v1.11.3 or greater

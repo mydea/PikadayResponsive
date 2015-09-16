@@ -1,3 +1,14 @@
+/*! 
+ * PikadayResponsive 
+ * A responsive datepicker built on top of Pikaday. It shows the native datepicker on mobile devices and a nice JS-picker on desktop. 
+ * 
+ * @author: Francesco Novy 
+ * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
+ * @link https://github.com/mydea/PikadayResponsive 
+ * @copyright: (c) 2015 
+ * @version: 0.6.2 
+ */ 
+
 @charset "UTF-8";
 
 /*!
@@ -228,7 +239,7 @@ http://nicolasgallagher.com/micro-clearfix-hack/
  * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
  * @link https://github.com/mydea/PikadayResponsive 
  * @copyright: (c) 2015 
- * @version: 0.6.0 
+ * @version: 0.6.2 
  */ 
 
 

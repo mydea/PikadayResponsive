@@ -6,7 +6,7 @@
  * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
  * @link https://github.com/mydea/PikadayResponsive 
  * @copyright: (c) 2015 
- * @version: 0.6.0 
+ * @version: 0.6.2 
  */ 
 
 (function (root, factory) {
@@ -144,8 +144,12 @@
                     obj.value *= 1;
                 }
                 $el.val(obj.value);
-                $el.trigger("change");
-                $el.trigger("change-date", [obj]);
+
+                // Wait 1ms in order to circumvent bug where events weren't triggered
+                setTimeout(function() {
+                    $el.trigger("change");
+                    $el.trigger("change-date", [obj]);
+                }, 1);
             });
         }
 
@@ -189,6 +193,10 @@
 
             return date;
         };
+
+        if($el.val()) {
+            setDate($el.val());
+        }
 
         obj.setDate = setDate;
 
