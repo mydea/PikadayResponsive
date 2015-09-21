@@ -5,11 +5,11 @@ A responsive datepicker built on top of Pikaday. It shows the native datepicker 
 
 Pikaday is a nice and lean datepicker. For more details, see here: https://github.com/dbushell/Pikaday
 
-Try the demo: http://fnovy.com/projects/pikaday-responsive/
+Try the demo: https://mydea.github.io/PikadayResponsive/
 
 Try it on mobile, too:
 
-![PikadayResponsive Demo](https://api.qrserver.com/v1/create-qr-code/?data=http%3A%2F%2Ffnovy.com%2Fprojects%2Fpikaday-responsive%2F&size=220x220&margin=0)
+![PikadayResponsive Demo](https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fmydea.github.io%2FPikadayResponsive%2F&size=220x220&margin=0)
 
 ## Why?
 Pikaday is a great datepicker, and there are a lot of other datepickers out there that work really well. However, all of them fall short when used on a mobile device, where the native datepickers work best (because they have been specifically optimised for the mobile experience). Native Datepickers have some drawbacks, though:
