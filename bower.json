@@ -1,6 +1,6 @@
 {
   "name": "pikaday-responsive",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "homepage": "https://github.com/mydea/PikadayResponsive",
   "authors": [
     "Francesco Novy <francesconovy@gmail.com>"
@@ -19,7 +19,8 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "src"
   ],
   "dependencies": {
     "jquery": ">=1.11.3",

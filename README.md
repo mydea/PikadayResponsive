@@ -110,7 +110,11 @@ dateObject = {
 }
 ```
 
-In addition, the dateObject has a function: `setDate()`. This function takes either a Moment.js object, a native JS-Date or a string in the specified `outputFormat`.
+
+## Setting the date: instance.setDate(newDate)
+
+In addition, the dateObject has a function: `setDate()`. This function takes either a Moment.js object, a native JS-Date or a string in the specified `outputFormat`. 
+Optionally, you can also pass in a format to parse from as second parameter: `instance.setDate(newDate, "YYYY-MM-DD")`.
 The input will be set to this value (no matter if it is a native date picker or a Pikaday picker) and a change-event will be triggered.
 If you call `dateObject.setDate(null)`, the field will be cleared. If you want to set the picker to the current day, you can simply call `dateObject.setDate(moment())`.
 
@@ -184,6 +188,10 @@ function () {
 An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
 
 ## Changelog
+v0.6.3
+
+* Add optional second parameter `format` to `setDate()`
+
 v0.6.2
 
 * Initial values of inputs should be set when initialising

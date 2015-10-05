@@ -149,7 +149,7 @@
          * @param date It is preferred to give a moment-object as param, but vanilla Dates or strings in the outputFormat work too
          * @returns Object The moment-date that was used to set the date
          */
-        var setDate = function(date) {
+        var setDate = function(date, format) {
             // If date is null, reset the field
             if(!date) {
                 if(obj.pikaday) {
@@ -167,7 +167,10 @@
                 date = moment(date);
             }
             if(typeof date === "string") {
-                date = moment(date, settings.outputFormat);
+                if(typeof format === "undefined" || !format) {
+                    format = settings.outputFormat;
+                }
+                date = moment(date, format);
             }
             if(typeof date === "number") {
                 date = moment(date);
