@@ -188,6 +188,10 @@ function () {
 An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
 
 ## Changelog
+v0.6.4
+
+* Update Pikaday dependency to 1.4.0
+
 v0.6.3
 
 * Add optional second parameter `format` to `setDate()`
