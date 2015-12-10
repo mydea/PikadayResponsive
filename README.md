@@ -155,6 +155,7 @@ pikadayResponsive(document.getElementById("date1"), {
     },
     placeholder: "",
     classes: "",
+    dayOffset: 0,
     pikadayOptions: {}
 });
 ```
@@ -173,6 +174,29 @@ The placeholder for the input-field.
 ### classes
 A string with classes that should be added to the displayed input-fields
 
+### dayOffset
+A number which is added to the date in Pikaday-mode. This is especially useful when working with timezones. 
+If you set a default timezone with moment-timezone, like `moment.tz.setDefault("America/Los_Angeles")`, your dates may turn out wrong if your browser's timezone is different. This is caused if the specified timezone's offset is lower than your browser's timezone offset.
+In this case, the picked date, which might be "2016-04-12 00:00:00" in "America/Los_Angeles", is converted to your local time zone, e.g. to "2016-04-11 22:00:00". This can be very hard to work with.
+The number of days specified here will simply be added to the selected date before it is processed. In the above case, the date that would actually be returned as value would be "2016-04-12 22:00:00". 
+
+An example implementation would be:
+
+```js
+var defaultOffset = moment.tz("Europe/Vienna")._offset; // This is your client's timezone
+var currentOffset = moment()._offset; // This is your specified timezone
+
+var dayOffset = 0;
+if(currentOffset < defaultOffset) {
+    dayOffset = 1;
+}
+
+var $date1 = $("#date1");
+var instance1 = pikadayResponsive($date1, {
+    dayOffset: dayOffset
+});
+```
+
 ### checkIfNativeDate
 You can overwrite this, for example if you don't want to use Modernizr. This has to be a function. 
 If this function returns true, the native date picker will be used, otherwise Pikaday will be used.
@@ -188,6 +212,10 @@ function () {
 An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
 
 ## Changelog
+v0.6.5
+
+* Add dayOffset option to work with timezones
+
 v0.6.4
 
 * Update Pikaday dependency to 1.4.0

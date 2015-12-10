@@ -1,6 +1,6 @@
 {
   "name": "pikaday-responsive",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "homepage": "https://github.com/mydea/PikadayResponsive",
   "authors": [
     "Francesco Novy <francesconovy@gmail.com>"
@@ -27,5 +27,8 @@
     "momentjs": "~2.10.6",
     "pikaday": "1.4.0",
     "modernizr": "~2.8.3"
+  },
+  "devDependencies": {
+    "moment-timezone": "~0.4.1"
   }
 }

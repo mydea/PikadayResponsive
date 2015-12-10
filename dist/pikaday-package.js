@@ -6,7 +6,7 @@
  * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
  * @link https://github.com/mydea/PikadayResponsive 
  * @copyright: (c) 2015 
- * @version: 0.6.4 
+ * @version: 0.6.5 
  */ 
 
 //! moment.js
@@ -4325,7 +4325,8 @@
         },
         classes: "",
         placeholder: "Select a date",
-        pikadayOptions: {}
+        pikadayOptions: {},
+        dayOffset: 0
     };
 
     return function (el, options) {
@@ -4370,7 +4371,7 @@
                 var val = $(this).val();
                 $display.removeClass("is-empty");
 
-                if(!val) {
+                if (!val) {
                     obj.date = null;
                     obj.value = null;
                     $display.addClass("is-empty");
@@ -4380,11 +4381,11 @@
                 }
 
                 // Convert numbers (unix timestamp) to ints
-                if(obj.value * 1 === parseInt(obj.value, 10)) {
+                if (obj.value * 1 === parseInt(obj.value, 10)) {
                     obj.value *= 1;
                 }
                 $el.val(obj.value);
-                if(obj.date) {
+                if (obj.date) {
                     $display.val(obj.date.format(settings.format));
                 } else {
                     $display.val(null);
@@ -4405,28 +4406,31 @@
                 format: settings.format
             }));
 
-
             $input.on("change", function () {
                 var val = $(this).val();
                 $input.removeClass("is-empty");
 
-                if(!val) {
+                if (!val) {
                     obj.date = null;
                     obj.value = null;
                     $input.addClass("is-empty")
                 } else {
                     obj.date = moment(val, settings.format);
+                    // Add an optional day offset to account for time zones
+                    obj.date.add(settings.dayOffset, "day");
+
                     obj.value = obj.date.format(settings.outputFormat);
+                    $(this).val(obj.value);
                 }
 
                 // Convert numbers (unix timestamp) to ints
-                if(obj.value * 1 === parseInt(obj.value, 10)) {
+                if (obj.value * 1 === parseInt(obj.value, 10)) {
                     obj.value *= 1;
                 }
                 $el.val(obj.value);
 
                 // Wait 1ms in order to circumvent bug where events weren't triggered
-                setTimeout(function() {
+                setTimeout(function () {
                     $el.trigger("change");
                     $el.trigger("change-date", [obj]);
                 }, 1);
@@ -4440,10 +4444,10 @@
          * @param date It is preferred to give a moment-object as param, but vanilla Dates or strings in the outputFormat work too
          * @returns Object The moment-date that was used to set the date
          */
-        var setDate = function(date, format) {
+        var setDate = function (date, format) {
             // If date is null, reset the field
-            if(!date) {
-                if(obj.pikaday) {
+            if (!date) {
+                if (obj.pikaday) {
                     obj.pikaday.setDate(null);
                 } else {
                     $input.val(null);
@@ -4454,20 +4458,20 @@
             }
 
             // Format date into moment-date
-            if(typeof date === "object" && typeof date.format !== "function") {
+            if (typeof date === "object" && typeof date.format !== "function") {
                 date = moment(date);
             }
-            if(typeof date === "string") {
-                if(typeof format === "undefined" || !format) {
+            if (typeof date === "string") {
+                if (typeof format === "undefined" || !format) {
                     format = settings.outputFormat;
                 }
                 date = moment(date, format);
             }
-            if(typeof date === "number") {
+            if (typeof date === "number") {
                 date = moment(date);
             }
 
-            if(obj.pikaday) {
+            if (obj.pikaday) {
                 obj.pikaday.setMoment(date);
             } else {
                 $input.val(date.format("YYYY-MM-DD"));
@@ -4477,7 +4481,7 @@
             return date;
         };
 
-        if($el.val()) {
+        if ($el.val()) {
             setDate($el.val());
         }
 
