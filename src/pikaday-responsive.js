@@ -110,12 +110,24 @@
             $input = $("<input type='text' class='pikaday__display pikaday__display--pikaday " + settings.classes + "' placeholder='" + settings.placeholder + "' />");
             $container.append($input);
 
+            var hasSelected = false;
+            var selectTimer = null;
+
             obj.pikaday = new Pikaday($.extend({}, settings.pikadayOptions, {
                 field: $input[0],
-                format: settings.format
+                format: settings.format,
             }));
 
             $input.on("change", function () {
+                if (hasSelected) {
+                    return;
+                }
+
+                hasSelected = true;
+                selectTimer = window.setTimeout(function () {
+                    hasSelected = false;
+                }, 10);
+
                 var val = $(this).val();
                 $input.removeClass("is-empty");
 

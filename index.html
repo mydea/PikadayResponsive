@@ -75,12 +75,19 @@
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/momentjs/min/moment-with-locales.js"></script>
+<script src="bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
 <script src="bower_components/pikaday/pikaday.js"></script>
 <script src="src/pikaday-responsive.js"></script>
 
 <script>
+
+
+    moment.tz.setDefault("America/Los_Angeles");
+
     var $date1 = $("#date1");
-    var instance1 = pikadayResponsive($date1);
+    var instance1 = pikadayResponsive($date1, {
+        dayOffset: 1
+    });
     $date1.on("change", function() {
        $("#output1").html($(this).val());
     });

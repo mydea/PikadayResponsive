@@ -212,6 +212,10 @@ function () {
 An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
 
 ## Changelog
+v0.6.6
+
+* Fix a bug with dayOffset which appeared when setting a date manually via keyboard, where the dayOffset was added twice.
+
 v0.6.5
 
 * Add dayOffset option to work with timezones
