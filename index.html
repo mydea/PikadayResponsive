@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pikaday Responsive</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<title>Pikaday Responsive</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 
-    <link rel="stylesheet" href="dist/pikaday-package.css">
-    <link rel="stylesheet" href="demo-style.css">
+	<link rel="stylesheet" href="dist/pikaday-package.css">
+	<link rel="stylesheet" href="demo-style.css">
 
-    <script src="bower_components/modernizr/modernizr.js"></script>
+	<script src="bower_components/modernizr/modernizr.js"></script>
 </head>
 <body>
 
 <div class="wrapper">
 
-    <h1>pikaday-responsive</h1>
+	<h1>pikaday-responsive</h1>
 
-    <p>
-        A responsive datepicker built on top of Pikaday.
-        It shows the native datepicker on mobile devices and a nice JS-picker on desktop.
-        It is realised as a jQuery-Plugin.
-    </p>
+	<p>
+		A responsive datepicker built on top of Pikaday.
+		It shows the native datepicker on mobile devices and a nice JS-picker on desktop.
+		It is realised as a jQuery-Plugin.
+	</p>
 
-    <p>
-        More Infos & Download on <a href="https://github.com/mydea/PikadayResponsive">GitHub</a>
-    </p>
+	<p>
+		More Infos & Download on <a href="https://github.com/mydea/PikadayResponsive">GitHub</a>
+	</p>
 
-    <p>
-        Created by: Francesco Novy
-        <br/><a href="http://fnovy.com">www.fnovy.com</a>
-        | <a href="mailto:francesconovy@gmail.com">francesconovy@gmail.com</a>
-    </p>
+	<p>
+		Created by: Francesco Novy
+		<br/><a href="http://fnovy.com">www.fnovy.com</a>
+		| <a href="mailto:francesconovy@gmail.com">francesconovy@gmail.com</a>
+	</p>
 
-    <h1>Default values</h1>
+	<h1>Default values</h1>
 
-    <p>
-        <label for="date1">Select a date:</label>
-        <input name="date" type="date" id="date1" class="test class"/>
-    </p>
+	<p>
+		<label for="date1">Select a date:</label>
+		<input name="date" type="date" id="date1" class="test class"/>
+	</p>
 
-    <h2>The output-value of the input-field is:</h2>
+	<h2>The output-value of the input-field is:</h2>
 
-    <p id="output1" class="output"></p>
+	<p id="output1" class="output"></p>
 
-    <h1>Change output format</h1>
+	<h1>Change output format</h1>
 
-    <p>You can specify an output format as a Moment.js string. E.g. "X" (UNIX timestamp):</p>
+	<p>You can specify an output format as a Moment.js string. E.g. "X" (UNIX timestamp):</p>
 
-    <p>
-        <label for="date2">Select a date:</label>
-        <input name="date" type="text" id="date2" value="1442613600"/>
-    </p>
+	<p>
+		<label for="date2">Select a date:</label>
+		<input name="date" type="text" id="date2" value="1442613600"/>
+	</p>
 
-    <h2>The output-value of the input-field is:</h2>
+	<h2>The output-value of the input-field is:</h2>
 
-    <p id="output2" class="output"></p>
+	<p id="output2" class="output"></p>
 
-    <h1>Change display format</h1>
+	<h1>Change display format</h1>
 
-    <p>You can also specifiy the display format as you wish. E.g. "Do MMM YYYY". You can use the dateObject to implement clear/today buttons.</p>
+	<p>You can also specifiy the display format as you wish. E.g. "Do MMM YYYY". You can use the dateObject to implement
+		clear/today buttons.</p>
 
-    <p>
-        <label for="date3">Select a date:</label>
-        <input name="date" type="date" id="date3"/>
-        <button id="clear">Clear</button>
-        <button id="today">Today</button>
-    </p>
+	<p>
+		<label for="date3">Select a date:</label>
+		<input name="date" type="date" id="date3"/>
+		<button id="clear">Clear</button>
+		<button id="today">Today</button>
+	</p>
 
-    <h2>The output-value of the input-field is:</h2>
+	<h2>The output-value of the input-field is:</h2>
 
-    <p id="output3" class="output"></p>
+	<p id="output3" class="output"></p>
 </div>
 
 
@@ -80,41 +81,40 @@
 <script src="src/pikaday-responsive.js"></script>
 
 <script>
+	moment.tz.setDefault("America/Los_Angeles");
 
+	var $date1 = $("#date1");
+	var instance1 = pikadayResponsive($date1, {
+		dayOffset: 1
+	});
+	$date1.on("change", function () {
+		$("#output1").html($(this).val());
+	});
 
-    moment.tz.setDefault("America/Los_Angeles");
+	var $date2 = $("#date2");
+	var instance2 = pikadayResponsive($date2, {
+		outputFormat: "X"
+	});
+	$date2.on("change", function () {
+		$("#output2").html($(this).val());
+	});
 
-    var $date1 = $("#date1");
-    var instance1 = pikadayResponsive($date1, {
-        dayOffset: 1
-    });
-    $date1.on("change", function() {
-       $("#output1").html($(this).val());
-    });
+	var $date3 = $("#date3");
+	var instance3 = pikadayResponsive($date3, {
+		format: "Do MMM YYYY",
+		outputFormat: "X"
+	});
+	$date3.on("change", function () {
+		$("#output3").html($(this).val());
+	});
 
-    var $date2 = $("#date2");
-    var instance2 = pikadayResponsive($date2, {
-        outputFormat: "X"
-    });
-    $date2.on("change", function() {
-        $("#output2").html($(this).val());
-    });
+	$("#clear").click(function () {
+		instance3.setDate(null);
+	});
 
-    var $date3 = $("#date3");
-    var instance3 = pikadayResponsive($date3, {
-        format: "Do MMM YYYY"
-    });
-    $date3.on("change", function() {
-        $("#output3").html($(this).val());
-    });
-
-    $("#clear").click(function() {
-        instance3.setDate(null);
-    });
-
-    $("#today").click(function() {
-        instance3.setDate(moment());
-    });
+	$("#today").click(function () {
+		instance3.setDate(moment());
+	});
 
 
 </script>

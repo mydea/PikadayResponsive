@@ -141,7 +141,7 @@
                     obj.date.add(settings.dayOffset, "day");
 
                     obj.value = obj.date.format(settings.outputFormat);
-                    $(this).val(obj.value);
+                    $(this).val(obj.date.format(settings.format));
                 }
 
                 // Convert numbers (unix timestamp) to ints

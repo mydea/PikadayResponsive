@@ -5,8 +5,8 @@
  * @author: Francesco Novy 
  * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
  * @link https://github.com/mydea/PikadayResponsive 
- * @copyright: (c) 2015 
- * @version: 0.6.6 
+ * @copyright: (c) 2016 
+ * @version: 0.6.7 
  */ 
 
 //! moment.js
@@ -4432,7 +4432,7 @@
                     obj.date.add(settings.dayOffset, "day");
 
                     obj.value = obj.date.format(settings.outputFormat);
-                    $(this).val(obj.value);
+                    $(this).val(obj.date.format(settings.format));
                 }
 
                 // Convert numbers (unix timestamp) to ints
