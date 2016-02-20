@@ -41,7 +41,7 @@
         format: "YYYY-MM-DD",
         outputFormat: "YYYY-MM-DD",
         checkIfNativeDate: function () {
-            return Modernizr.inputtypes.date && (Modernizr.touch && navigator.appVersion.indexOf("Win") === -1);
+            return Modernizr.inputtypes.date && (Modernizr.touchevents && navigator.appVersion.indexOf("Win") === -1);
         },
         classes: "",
         placeholder: "Select a date",
