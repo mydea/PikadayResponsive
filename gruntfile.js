@@ -82,6 +82,33 @@ module.exports = function(grunt) {
                     'dist/package_components/pikaday-responsive.css': 'src/css/scss/pikaday-responsive.scss'
                 }
             }
+        },
+        "bower-install-simple": {
+            options: {
+                color: true
+            },
+            "prod": {
+                options: {
+                    production: true
+                }
+            },
+            "dev": {
+                options: {
+                    production: false
+                }
+            }
+        },
+        'bower-update': {
+            options: {
+                pickAll: true,
+                filter: function(package, options) {
+                    if (package.name.indexOf('jquery') === 0) {
+                        return false
+                    }
+                    return true
+                },
+                rangeChar: '~'
+            }
         }
 
     });
@@ -92,8 +119,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-bower-install-simple');
+    grunt.loadNpmTasks('grunt-bower-update');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ["sass", "concat", "uglify", "cssmin", "modernizr"]);
+    grunt.registerTask('default', ["bower-update", "bower-install-simple", "sass", "concat", "uglify", "cssmin", "modernizr"]);
 
 };
