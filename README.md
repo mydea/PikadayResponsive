@@ -49,7 +49,9 @@ PikadayResponsive needs the following components to work:
 * Pikaday (https://github.com/dbushell/Pikaday)
 * Modernizr or other feature detection library
 
-You can also use pikaday-package.js, which includes Moment.js and Pikaday. It does not, however, contain jQuery and Modernizr - you have to add them manually.
+You can also use pikaday-package.js, which bundles Moment.js, Pikaday, and Pikaday Responsive. It does not, however, contain jQuery and Modernizr - you have to add them manually. The dist/ directory contains the package files, a directory package_components/ which contains the individual files the package bundles, and a directory dependencies/ which contains jQuery and an automatically generated copy of modernizr pared down to only the features PikayResponsive requires.
+
+To build a fresh copy of the package, with the latest version of the dependencies, simply download or clone the directory, and run `npm install` followed by `grunt`.
 
 ## Usage
 You can install PikadayResponsive via Bower:
