@@ -1,4 +1,4 @@
-/*! 
+/* 
  * PikadayResponsive 
  * A responsive datepicker built on top of Pikaday. It shows the native datepicker on mobile devices and a nice JS-picker on desktop. 
  * 
@@ -7,9 +7,7 @@
  * @link https://github.com/mydea/PikadayResponsive 
  * @copyright: (c) 2016 
  * @version: 0.6.7 
- */ 
-
-
+ */
 .pikaday__container {
   display: inline-block;
   position: relative;

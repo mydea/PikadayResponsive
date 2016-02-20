@@ -25,8 +25,7 @@
   "dependencies": {
     "jquery": "<2",
     "momentjs": "~2.11.2",
-    "pikaday": "1.4.0",
-    "modernizr": "~3.3.1"
+    "pikaday": "1.4.0"
   },
   "devDependencies": {
     "moment-timezone": "~0.5.0"
