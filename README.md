@@ -96,7 +96,7 @@ HTML:
 JS:
 
 ```js
-var dateObject = pikadayResponsive(document.getElementbyId("date"));
+var dateObject = pikadayResponsive(document.getElementById("date"));
 ```
 
 The `dateObject` returned from `pikadayResponsive()` is a POJO (plain old JavaScript object) with the following properties:
