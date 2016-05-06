@@ -23,12 +23,11 @@
     "src"
   ],
   "dependencies": {
-    "jquery": ">=1.11.3",
-    "momentjs": "~2.10.6",
-    "pikaday": "1.4.0",
-    "modernizr": "~2.8.3"
+    "jquery": "<2",
+    "momentjs": "~2.11.2",
+    "pikaday": "1.4.0"
   },
   "devDependencies": {
-    "moment-timezone": "~0.4.1"
+    "moment-timezone": "~0.5.0"
   }
 }
