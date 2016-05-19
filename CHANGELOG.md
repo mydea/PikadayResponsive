@@ -1,5 +1,8 @@
 # Changelog
 
+v0.6.9
+* Fix bug with incorrect detection of touch events caused by update to Modernizr 3.x
+
 v0.6.8
 * Improve structure of repo (thanks to @olets)
 * Reformat whitespace

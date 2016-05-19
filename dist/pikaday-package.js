@@ -7,7 +7,7 @@
  * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
  * @link https://github.com/mydea/PikadayResponsive 
  * @copyright: (c) 2016 
- * @version: 0.6.7 
+ * @version: 0.6.9 
  */ 
 
 //! moment.js
@@ -5144,7 +5144,7 @@
  * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
  * @link https://github.com/mydea/PikadayResponsive 
  * @copyright: (c) 2016 
- * @version: 0.6.7 
+ * @version: 0.6.9 
  */ 
 
 (function(root, factory) {
@@ -5179,7 +5179,7 @@
     format: "YYYY-MM-DD",
     outputFormat: "YYYY-MM-DD",
     checkIfNativeDate: function() {
-      return Modernizr.inputtypes.date && (Modernizr.touch && navigator.appVersion.indexOf("Win") === -1);
+      return Modernizr.inputtypes.date && (Modernizr.touchevents && navigator.appVersion.indexOf("Win") === -1);
     },
     classes: "",
     placeholder: "Select a date",

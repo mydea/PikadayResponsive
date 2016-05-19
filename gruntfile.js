@@ -128,6 +128,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-update');
 
   // 4. Where we tell Grunt what to do when we type 'grunt' into the terminal.
-  grunt.registerTask('default', ['bower-update', 'bower-install-simple', 'sass', 'concat', 'uglify', 'cssmin', 'modernizr']);
+  grunt.registerTask('default', ['bower-update', 'bower-install-simple:prod', 'sass', 'concat', 'uglify', 'cssmin', 'modernizr']);
 
 };
