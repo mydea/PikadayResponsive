@@ -24,23 +24,6 @@ Basically, PikadayResponsive tries to detect if you are on a mobile device. For 
 
 If, however, touch AND HTML5-date support are detected, it will instead display a native input type="date". Over this native input field, another, readonly and click-trough input field is displayed, in which a formatted date is displayed.
 
-## Updating to 0.6.0
-PikadayResponsive was completely re-written for v0.6.0 and the API changed quite a bit for this version. If you want to update from < 0.6.0 to >= 0.6.0, follow these steps:
-
-* Instead of `$("#my-element").pikaday()`, you have to instantiate it with `var dateInstance = pikadayResponsive(document.getElementById("my-element"), options);`
-* The available options changed a bit. See the *Configuration* section for details about the available options. 
-* The *clear* and *today* buttons have been removed. If you need this functionality, it is easy to implement it yourself with the new `dateInstance.setDate()` function.
-* The `displayFormat` option has been renamed to `format`. Both `format` and `outputFormat` now only take Moment.js-formats as parameters. If you want to use an UNIX-timestamp, you cans imply use `X`.
-
-It is not possible anymore to instantiate pikadayResponsive for a collection. You have to do this in a loop:
-
-```js
-$elements = $(".input");
-$elements.each(function() {
-    pikadayResponsive($(this));
-});
-```
-
 ## Dependencies
 PikadayResponsive needs the following components to work:
 
@@ -213,6 +196,36 @@ function () {
 ### pikadayOptions
 An object with options that will be used to initialize Pikaday. Note that ```field``` and ```format``` will be overridden.
 
+## Manually opening the date picker
+
+Opening the date picker from somewhere else on the page can be a bit tricky.
+The best way to do this is by simply using standard HTML labels.
+Since 0.7.0, the generated inputs will receive an ID, if the original input had an ID. It will be the original ID + `-input`. 
+For example:
+
+```html
+<input id='date1'>
+```
+
+will become:
+
+```html
+<input id='date1-input' class='...'>
+```
+
+This makes it possible to trigger the date picker from any place on your page with a simple label:
+
+```html
+<label for='date1-input'>Open Date Picker</label>
+```
+
+See an example for this on the bottom of the [Demo](https://mydea.github.io/PikadayResponsive/).
+
+## Changelog
+
+For changes, see the [Changelog](CHANGELOG.md)
+
+Additionally, please note the breaking changes from 0.5 to 0.6: [Information about upgrading to >= 0.6.0](upgrading-to-v0-6.md)
 
 ## Author
 PikadayResponsive has been created by Francesco Novy | http://www.fnovy.com | francesconovy@gmail.com | @_fnovy
@@ -224,4 +237,4 @@ Credits go to David Bushell and Ramiro Rikkert for creating Pikaday.
 * Ramiro Rikkert GitHub @RamRik
 
 ## Copyright
-Copyright © 2015 Francesco Novy | MIT license
+Copyright © 2016 Francesco Novy | MIT license
