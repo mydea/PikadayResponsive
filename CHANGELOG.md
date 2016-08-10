@@ -1,5 +1,8 @@
 # Changelog
 
+v0.7.0
+* Automatically add IDs to generated inputs to enable usage of labels
+
 v0.6.9
 * Fix bug with incorrect detection of touch events caused by update to Modernizr 3.x
 
