@@ -74,12 +74,12 @@
     if (settings.checkIfNativeDate()) {
       // Use native date picker
       $input = $("<input type='date' class='pikaday__invisible' placeholder='" + settings.placeholder + "'/>");
+      if (originalId) {
+        $input.attr('id', originalId + '-input');
+      }
       $container.append($input);
 
       $display = $("<input type='text' readonly='readonly' class='pikaday__display pikaday__display--native " + settings.classes + "' placeholder='" + settings.placeholder + "' />");
-      if (originalId) {
-        $display.attr('id', originalId + '-display');
-      }
       $container.append($display);
 
       $input.on("change", function() {
@@ -115,7 +115,7 @@
       // Use Pikaday
       $input = $("<input type='text' class='pikaday__display pikaday__display--pikaday " + settings.classes + "' placeholder='" + settings.placeholder + "' />");
       if (originalId) {
-        $input.attr('id', originalId + '-display');
+        $input.attr('id', originalId + '-input');
       }
       $container.append($input);
 
