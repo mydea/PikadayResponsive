@@ -68,12 +68,18 @@
     $el.wrap("<span class='pikaday__container'></span>");
     $container = $el.parent(".pikaday__container");
 
+    // If the original input has an ID, use it to generate IDs for the generated display inputs
+    var originalId = $el.attr('id');
+
     if (settings.checkIfNativeDate()) {
       // Use native date picker
       $input = $("<input type='date' class='pikaday__invisible' placeholder='" + settings.placeholder + "'/>");
       $container.append($input);
 
       $display = $("<input type='text' readonly='readonly' class='pikaday__display pikaday__display--native " + settings.classes + "' placeholder='" + settings.placeholder + "' />");
+      if (originalId) {
+        $display.attr('id', originalId + '-display');
+      }
       $container.append($display);
 
       $input.on("change", function() {
@@ -108,6 +114,9 @@
     } else {
       // Use Pikaday
       $input = $("<input type='text' class='pikaday__display pikaday__display--pikaday " + settings.classes + "' placeholder='" + settings.placeholder + "' />");
+      if (originalId) {
+        $input.attr('id', originalId + '-display');
+      }
       $container.append($input);
 
       var hasSelected = false;

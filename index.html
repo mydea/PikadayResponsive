@@ -35,7 +35,7 @@
   <h1>Default values</h1>
 
   <p>
-    <label for="date1">Select a date:</label>
+    <label for="date1-display">Select a date:</label>
     <input name="date" type="date" id="date1" class="test class"/>
   </p>
 
@@ -48,7 +48,7 @@
   <p>You can specify an output format as a Moment.js string. E.g. "X" (UNIX timestamp):</p>
 
   <p>
-    <label for="date2">Select a date:</label>
+    <label for="date2-display">Select a date:</label>
     <input name="date" type="text" id="date2" value="1442613600"/>
   </p>
 
@@ -62,7 +62,7 @@
     clear/today buttons.</p>
 
   <p>
-    <label for="date3">Select a date:</label>
+    <label for="date3-display">Select a date:</label>
     <input name="date" type="date" id="date3"/>
     <button id="clear">Clear</button>
     <button id="today">Today</button>
@@ -81,7 +81,9 @@
 
 <script>
   var $date1 = $("#date1");
-  var instance1 = pikadayResponsive($date1);
+  var instance1 = pikadayResponsive($date1, {
+    checkIfNativeDate: function() { return true; }
+  });
   $date1.on("change", function() {
     $("#output1").html($(this).val());
   });
