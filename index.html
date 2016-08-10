@@ -71,6 +71,14 @@
   <h2>The output-value of the input-field is:</h2>
 
   <p id="output3" class="output"></p>
+
+  <h1>Remote Triggering</h1>
+  <p>
+    By using labels, you can trigger date pickers from different places on your page.
+  </p>
+  <label for="date1-input">
+    >> Click to open first date picker
+  </label>
 </div>
 
 
@@ -81,9 +89,7 @@
 
 <script>
   var $date1 = $("#date1");
-  var instance1 = pikadayResponsive($date1, {
-    checkIfNativeDate: function() { return true; }
-  });
+  var instance1 = pikadayResponsive($date1);
   $date1.on("change", function() {
     $("#output1").html($(this).val());
   });
