@@ -22,7 +22,7 @@ PikadayResponsive tries to solve this problem.
 ## How it works
 Basically, PikadayResponsive tries to detect if you are on a mobile device. For this, Modernizr is used (altough you can choose to use a different feature detection library if you want). It checks for touch and HTML5 input-type date support, and if one of them is missing, it simply displays a Pikaday-datepicker.
 
-If, however, touch AND HTML5-date support are detected, it will instead display a native input type="date". Over this native input field, another, readonly and click-trough input field is displayed, in which a formatted date is displayed.
+If, however, touch AND HTML5-date support are detected, it will instead display a native input type="date". Over this native input field, another, readonly and click-through input field is displayed, in which a formatted date is displayed.
 
 ## Dependencies
 PikadayResponsive needs the following components to work:
