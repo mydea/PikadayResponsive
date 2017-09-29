@@ -42,8 +42,6 @@
     var $el = $(el);
     var settings = $.extend({}, defaultOptions, options);
 
-    // The container element for the input
-    var $container;
     // The actual input field
     var $input;
     // The display input field
@@ -64,9 +62,6 @@
 
     // The original input field is made hidden. This field will contain the actual value.
     $el.attr("type", "hidden");
-    // Wrap the input in a container
-    $el.wrap("<span class='pikaday__container'></span>");
-    $container = $el.parent(".pikaday__container");
 
     // If the original input has an ID, use it to generate IDs for the generated display inputs
     var originalId = $el.attr('id');
@@ -77,10 +72,10 @@
       if (originalId) {
         $input.attr('id', originalId + '-input');
       }
-      $container.append($input);
+      $el.after($input);
 
       $display = $("<input type='text' readonly='readonly' class='pikaday__display pikaday__display--native " + settings.classes + "' placeholder='" + settings.placeholder + "' />");
-      $container.append($display);
+      $el.after($display);
 
       $input.on("change", function() {
         var val = $(this).val();
@@ -117,7 +112,7 @@
       if (originalId) {
         $input.attr('id', originalId + '-input');
       }
-      $container.append($input);
+      $el.after($input);
 
       var hasSelected = false;
       var selectTimer = null;
