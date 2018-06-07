@@ -6,7 +6,7 @@
  * @author: Francesco Novy 
  * @licence: MIT <http://www.opensource.org/licenses/mit-license.php> 
  * @link https://github.com/mydea/PikadayResponsive 
- * @copyright: (c) 2016 
+ * @copyright: (c) 2018 
  * @version: 0.7.0 
  */ 
 
@@ -86,7 +86,9 @@
 
     if (settings.checkIfNativeDate()) {
       // Use native date picker
-      $input = $("<input type='date' class='pikaday__invisible' placeholder='" + settings.placeholder + "'/>");
+      var minDate = settings.pikadayOptions.minDate ? moment(settings.pikadayOptions.minDate.toISOString()).format("YYYY-MM-DD") : "";
+      var maxDate = settings.pikadayOptions.maxDate ? moment(settings.pikadayOptions.maxDate.toISOString()).format("YYYY-MM-DD") : "";
+      $input = $("<input type='date' class='pikaday__invisible' placeholder='" + settings.placeholder + "' min='" + minDate + "' max='" + maxDate + "'/>");
       if (originalId) {
         $input.attr('id', originalId + '-input');
       }
