@@ -74,7 +74,9 @@
 
     if (settings.checkIfNativeDate()) {
       // Use native date picker
-      $input = $("<input type='date' class='pikaday__invisible' placeholder='" + settings.placeholder + "'/>");
+      var minDate = settings.pikadayOptions.minDate ? moment(settings.pikadayOptions.minDate.toISOString()).format("YYYY-MM-DD") : "";
+      var maxDate = settings.pikadayOptions.maxDate ? moment(settings.pikadayOptions.maxDate.toISOString()).format("YYYY-MM-DD") : "";
+      $input = $("<input type='date' class='pikaday__invisible' placeholder='" + settings.placeholder + "' min='" + minDate + "' max='" + maxDate + "'/>");
       if (originalId) {
         $input.attr('id', originalId + '-input');
       }

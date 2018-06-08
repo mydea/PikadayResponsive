@@ -79,6 +79,19 @@
   <label for="date1-input">
     >> Click to open first date picker
   </label>
+
+  <h1>Date Picker with min and max date</h1>
+  <p>
+    By using pikaday option minDate and maxDate you can set up min and max date for native date picker.<br>
+    NOTE: This feature is only available for Android devices.
+  </p>
+  <p>
+    <label for="date4-input">Select a date:</label>
+    <input name="date" type="date" id="date4"/>
+  </p>
+  <h2>The output-value of the input-field is:</h2>
+
+  <p id="output4" class="output"></p>
 </div>
 
 
@@ -107,8 +120,29 @@
     format: "Do MMM YYYY",
     outputFormat: "X"
   });
+
+  var $date4 = $("#date4");
+  var today = new Date();
+  var minDate = new Date();
+  var maxDate = new Date();
+  minDate.setDate(today.getDate() + 3);
+  maxDate.setDate(today.getDate() + 365);
+  var instance4 = pikadayResponsive($date4, {
+    format: "DD/MM/YYYY",
+    outputFormat: "DD/MM/YYYY",
+    pikadayOptions: {
+      minDate: minDate,
+      maxDate: maxDate,
+    },
+  });
+  instance4.setDate(minDate);
+
   $date3.on("change", function() {
     $("#output3").html($(this).val());
+  });
+
+  $date4.on("change", function() {
+    $("#output4").html($(this).val());
   });
 
   $("#clear").click(function() {
